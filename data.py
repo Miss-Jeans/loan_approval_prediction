@@ -237,9 +237,12 @@ class GraphBuilder:
         """     
         # Get data from wrangle data method
         df=self.data.wrangle_data()
+
+        # Group by prior default status and boolean loan_status to compute total counts
+        df_counts = df.groupby(["cb_person_default_on_file", "loan_status"]).size().reset_index(name="Frequency")
      
         # Create Figure   
-        fig=px.bar(data_frame=df,x="cb_person_default_on_file",color="loan_status",title="Prior Loan Default")
+        fig=px.bar(data_frame=df_counts,x="cb_person_default_on_file",y="Frequency",barmode="group",color="loan_status",title="Prior Loan Default")
         
         #Axes label
         fig.update_layout(xaxis_title="Prior Default",yaxis_title="Frequency")
