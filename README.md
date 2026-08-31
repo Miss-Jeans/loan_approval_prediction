@@ -27,7 +27,7 @@ Rather than relying on manual, discretionary, or arbitrary decision-making, fina
 ##  Key Technical Highlights & Pipeline
 
 - **Dataset:** Sourced from Kaggle ([Loan Approval Prediction Dataset](https://www.kaggle.com/)).
-- **Imbalanced Data Handling:** Address class imbalance (where non-default applications significantly outnumber defaults) during cross-validation and evaluation to ensure high sensitivity toward potential default cases.
+- **Imbalanced Data Handling:** Addressed class imbalance within the `loan_status` target variable during cross-validation and evaluation to ensure high sensitivity toward identifying true loan approval cases without compromising precision.
 - **Model Training & Tuning:** Built using `GradientBoostingClassifier` with extensive **GridSearchCV** hyperparameter optimization.
 - **Data Preprocessing & Validation:** Implemented an automated object-oriented `Model` wrapper class to handle input sanitization, data alignment, and dynamic missing value imputation at inference time.
-- **Interactive Web App:** Deployed with **Dash** and **Plotly** on **Render** (served via **Gunicorn**), offering executive visual analytics and interactive parameter inputs.
+- **Interactive Web App:** Deployed with [Dash](https://dash.plotly.com/) and Plotly on [Render](https://render.com/) (served via **Gunicorn**), offering executive visual analytics and interactive parameter inputs.
