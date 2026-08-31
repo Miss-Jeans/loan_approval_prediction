@@ -15,6 +15,10 @@ predictions_df = mb.make_predictions()
 
 #instantiate app
 app=Dash(__name__)
+
+#Instantiate Server to run on Render
+server=app.server
+
 app.layout=html.Div(
     [
         html.H1("Applicant Demographics"),

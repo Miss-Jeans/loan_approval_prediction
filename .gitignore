@@ -13,4 +13,4 @@ env/
 Thumbs.db
 
 # Optional: Large model files (if >100MB)
-# data/*.pkl
+# data/*.pkl.ipynb_checkpoints/
