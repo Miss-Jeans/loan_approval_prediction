@@ -15,6 +15,10 @@ predictions_df = mb.make_predictions()
 
 #instantiate app
 app=Dash(__name__)
+
+#Instantiate Server to run on Render
+server=app.server
+
 app.layout=html.Div(
     [
         html.H1("Applicant Demographics"),
@@ -25,8 +29,7 @@ app.layout=html.Div(
         html.H1("The Model"),
         html.H2("Choose Threshold"),
         dcc.Slider(min=0.0,max=1.0,value=0.0,step=0.1,id="confusion_matrix_slider"),
-        html.Div(id="confusion_matrix_display"),
-        html.Div(id="classification_report_display"),
+        html.Div(id="model_evaluation_results"),
         html.H2("Feature Importances"),
         dcc.Graph(figure=mb.feature_importance(),id="gini_importance_display"),
         html.H2("Predictions"),
@@ -76,9 +79,18 @@ def display_demo_graph(graph_name):
     return dcc.Graph(figure=fig)
   
 
-@app.callback([Output("confusion_matrix_display","children"),Output("classification_report_display", "children")],Input("confusion_matrix_slider","value"))
+@app.callback(Output("model_evaluation_results","children"),Input("confusion_matrix_slider","value"))
 def confusion_matrix_plot(threshold_val):
-    fig,fig_report=mb.make_cnf_matrix(threshold_val)
-    return dcc.Graph(figure=fig),dcc.Graph(figure=fig_report)
+    result=mb.make_cnf_matrix(threshold_val)
+    
+    return html.Div(
+        [
+            dcc.Graph(figure=result["fig"]),
+            dcc.Graph(figure=result["fig_report"]),
+            html.H3(f"Model ROC-AUC:{round(result["Roc"],2)}")
+            
+        ]
+    )
+            
 
     

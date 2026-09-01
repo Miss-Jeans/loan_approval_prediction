@@ -151,9 +151,11 @@ class ModelBuilder:
             title=f"Classification Report Heatmap (Accuracy: {round(report_dict['accuracy'],2)})"
         )
         
+        #Calculate the ROC-AUC Score
+        Roc=roc_auc_score(self.y_test, y_pred_proba)
         
-        #return fig and classification_report
-        return fig,fig_report
+        #return Confusion matrix heatmap ,classification_report and ROC-AUC score as a dictionary
+        return {"fig": fig,"fig_report": fig_report,"Roc": Roc}
         
     def feature_importance(self):
         """Extracts feature importances from the fitted model and returns a plot of the Gini Impunity"""
