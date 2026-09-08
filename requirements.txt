@@ -1,0 +1,12 @@
+dash
+pandas
+scikit-learn
+plotly
+pyarrow
+gunicorn
+numpy
+joblib
+category_encoders<2.7.0
+statsmodels
+python-dotenv
+pymongo[srv]

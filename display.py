@@ -315,8 +315,7 @@ def exp_results(threshold):
                     html.H3("Chi-Square Test of Independence"),
                     html.P(f"p-value: {result.pvalue:.4f}"),
                     html.P(f"Statistic: {result.statistic:.4f}"),
-                    html.P(f"Verdict: {
-                    'Statistically Significant!, threshold sigificantly increases loan recovery' if result.pvalue < 0.05 else 'Statistically Insignificant!'}", 
+                    html.P(f"Verdict: {'Statistically Significant!, threshold sigificantly increases loan recovery' if result.pvalue < 0.05 else 'Statistically Insignificant!'}", 
                            style={"fontWeight": "bold", "color": "#007bff"},
                           ),
                 ],
