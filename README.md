@@ -125,3 +125,23 @@ Because financial institutions operate on profit preservation and capital growth
 
 ### 5. Statistical Validation
 A **Chi-Square Test of Independence** ($\chi^2$) is executed dynamically on the contingency table comparing Control vs. Treatment outcomes to verify if threshold adjustments yield a statistically significant difference ($p \le 0.05$).
+
+---
+
+## Tech Stack & Dependencies
+
+* **Language & Frameworks:** Python 3.11+, Dash, Plotly, Flask, Gunicorn
+* **Data Processing & ML:** Pandas, NumPy, Scikit-learn, Statsmodels, Category Encoders, Joblib
+* **Database & Infrastructure:** MongoDB (PyMongo), PyArrow, Render Cloud Platform
+
+---
+
+## Local Development Setup
+
+To run this application locally on your machine:
+
+### Clone Repository & Set Environment Variables
+```bash
+git clone [https://github.com/Miss-Jeans/loan_approval_prediction.git](https://github.com/Miss-Jeans/loan_approval_prediction.git)
+cd loan_approval_prediction
+
