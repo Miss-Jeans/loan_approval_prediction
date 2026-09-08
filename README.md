@@ -1,26 +1,26 @@
-#  Loan Approval Prediction & Executive Dashboard
+#  CREDIT OPTIMIZATION AND A/B TESTING DASHBOARD
 
 [![Live App](https://img.shields.io/badge/Render-Live_Demo-brightgreen?style=for-the-badge&logo=render)](https://loan-approval-prediction-yx3l.onrender.com/)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)](https://www.python.org/)
 [![Dash](https://img.shields.io/badge/Dash-Plotly-100000?style=for-the-badge&logo=plotly)](https://dash.plotly.com/)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 
-An end-to-end Machine Learning web application and interactive dashboard designed to evaluate credit risk and predict loan approval probabilities in real time.
-
+An end-to-end Machine Learning web application and executive dashboard designed to evaluate credit risk, simulate decision-boundary threshold tuning and run A/B testing on medium-risk loan applicants in real time.
 >  **Live Demo:** [https://loan-approval-prediction-yx3l.onrender.com/](https://loan-approval-prediction-yx3l.onrender.com/)
 
 ---
 
 ##  Executive Summary
-
 Whether funding higher education, refinancing existing debt or launching a business venture, individuals frequently rely on financial institutions (banks, credit unions and microfinance lenders) for capital.
 
-For financial institutions, approving or rejecting these applications is a critical balance between growth and risk management. Key decisions rely on multi-faceted applicant profiles—including credit history, prior defaults, income ratios and employment stability. 
+For financial institutions, approving or rejecting these applications is a critical balance between portfolio growth and risk management. Key decisions rely on multi-faceted applicant profiles—including credit history, prior defaults, income ratios and employment stability.
 
-Rather than relying on manual, discretionary or arbitrary decision-making, financial institutions require a **robust, automated algorithmic pipeline** to:
-- **Minimize Default Risk:** Accurately identify high-risk applicants before credit extension.
-- **Maximize Profitability:** Maintain steady approval rates for low-risk, qualified borrowers.
-- **Ensure Scalability & Reliability:** Serve real-time evaluations consistently for daily high-volume applications.
+Rather than relying on static or discretionary decision-making, this project implements a production-grade algorithmic pipeline and experimental framework to:
+
+* **Minimize Default Risk:** Accurately identify high-risk applicants before credit extension using a tuned Gradient Boosting Classifier.
+* **Maximize Portfolio Profitability:** Re-evaluate previously rejected medium-risk borrowers using dynamic threshold tuning and financial return-on-investment (ROI) modeling.
+* **Validate Decisions Statistically:** Perform dynamic Chi-Square ($\chi^2$) test-of-independence evaluations on experimental A/B variants.
+* **Ensure End-to-End Scalability:** Stream documents from MongoDB through a Python processing engine to a Dash/Plotly interactive web dashboard hosted on Render.
 
 ---
 
@@ -28,8 +28,8 @@ Rather than relying on manual, discretionary or arbitrary decision-making, finan
 
 - **Dataset:** Sourced from Kaggle ([Loan Approval Prediction Dataset](https://www.kaggle.com/)).
 - **Imbalanced Data Handling:** Addressed class imbalance within the `loan_status` target variable during cross-validation and evaluation to ensure high sensitivity toward identifying true loan approval cases without compromising precision.
-- **Model Training & Tuning:** Built using `GradientBoostingClassifier` with extensive **GridSearchCV** hyperparameter optimization.
-- **Data Preprocessing & Validation:** Implemented an automated object-oriented `Model` wrapper class to handle input sanitization, data alignment, and dynamic missing value imputation at inference time.
+- **Model Training & Hyperparameter Tuning:** Built using `GradientBoostingClassifier` with extensive **GridSearchCV** hyperparameter optimization.
+- **Object-Oriented Pipeline Architecture:** Implemented modular Python wrappers (`Model`, `Repository`, `Experiment`) handling automated data preprocessing, input alignment, dynamic thresholding and risk calculation.
 - **Interactive Web App:** Deployed with [Dash](https://dash.plotly.com/) and Plotly on [Render](https://render.com/) (served via **Gunicorn**), offering executive visual analytics and interactive parameter inputs.
 
 - ## Model Performance & Diagnostic Evaluation
@@ -50,7 +50,7 @@ To verify that the tuned `GradientBoostingClassifier` generalizes well to unseen
 
 ### Detailed Classification Reports
 
-#### Training Set Performance
+#### Training Set Performance ($N=26,064$)
 ```text
               precision    recall  f1-score   support
 
@@ -64,7 +64,7 @@ weighted avg       0.89      0.89      0.89     26064
 Model ROC-AUC: 0.92
 
 ```
-#### Test Set Performance
+#### Test Set Performance ($N=6,517$)
 ```text
               precision    recall  f1-score   support
 
@@ -78,7 +78,7 @@ weighted avg       0.89      0.89      0.89     6517
 Model ROC-AUC: 0.92
 ```
 
-## Model Optimization & A/B Testing Experiment
+## A/B Testing Experiment
 
 ### 1. Data Pipeline & Architecture
 * **Data Ingestion (Phase I):** Raw applicant demographics and loan performance datasets were imported into **MongoDB** as document collections to enable scalable querying and persistent state management across the modeling pipeline.
