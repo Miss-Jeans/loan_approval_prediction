@@ -15,7 +15,7 @@ An end-to-end Machine Learning web application and executive dashboard designed 
 ##  Executive Summary
 Whether funding higher education, refinancing existing debt or launching a business venture, individuals frequently rely on financial institutions (banks, credit unions and microfinance lenders) for capital.
 
-For financial institutions, approving or rejecting these applications is a critical balance between portfolio growth and risk management. Key decisions rely on multi-faceted applicant profiles—including credit history, prior defaults, income ratios and employment stability.
+For financial institutions, approving or rejecting these applications is a critical balance between portfolio growth and risk management. Key decisions rely on multi-faceted applicant profiles including credit history, prior defaults, income ratios and employment stability.
 
 Rather than relying on static or discretionary decision-making, this project implements a production-grade algorithmic pipeline and experimental framework to:
 
@@ -105,7 +105,7 @@ During predictive modeling, analysis revealed a high loan rejection rate under t
 
 ---
 
-### 3. A/B Experiment Setup
+### 3. Experiment Design
 Demographic records pulled from MongoDB for grades D and E were split into two experimental variants:
 
 * **Control Group:** Vetted against baseline approval criteria ($\text{Predicted Rejection Risk} > 0.50$).
@@ -118,8 +118,8 @@ Because financial institutions operate on profit preservation and capital growth
 1. **Reconsidered Approvals:** Volume of previously rejected treatment applicants approved under the adjusted threshold ($\le 0.15$).
 2. **Net ROI & Profitability:**
    $$\text{Net Expected Profit} = \text{Expected Gross Interest Income} - \text{Expected Default Loss}$$
-   * **Gross Interest Income:** Portfolio volume x average interest rate on reconsidered loans.
-   * **Expected Default Loss:** Modeled by weighting individual loan amounts against predicted rejection probabilities ($P(\text{reject})$).
+   * **Gross Interest Income:** $$\text{Portfolio volume}  X  \text{average interest rate on reconsidered loans}$$.
+   * **Expected Default Loss:** $$\text{Modeled by weighting individual loan amounts against predicted rejection probabilities}$$ ($P (\text{reject}))$.
 
 ---
 
