@@ -3,14 +3,30 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual Environment
+# Virtual Environments
 venv/
 env/
 .venv/
+ENV/
 
-# OS files
+# Environment variables & secrets
+.env
+*.env.local
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Trained Models & Large Data Files 
+# *.pkl
+# *.joblib
+# data/*.csv
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS System Files
 .DS_Store
 Thumbs.db
-
-# Optional: Large model files (if >100MB)
-# data/*.pkl.ipynb_checkpoints/

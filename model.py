@@ -8,7 +8,7 @@ import pandas as pd
 import plotly.express as px
 #Model Building
 from sklearn.model_selection import train_test_split,GridSearchCV
-from sklearn.pipeline import make_pipeline
+from sklearn.pipeline import make_pipeline,Pipeline
 from sklearn.impute import SimpleImputer
 from category_encoders import OrdinalEncoder
 from sklearn.ensemble import GradientBoostingClassifier 
@@ -51,20 +51,50 @@ class Model:
         #Extracting the Training data
         X_train,X_test,y_train,y_test=self.get_train_test_data()
         
-        #Making a pipeline with the GradientBoostingClassifier,SimpleInmputer and One Hot Encoding
-        clf=make_pipeline(OrdinalEncoder(),SimpleImputer(),GradientBoostingClassifier(random_state=42))
+        #Define feature groups
+        num_cols = [
+        'person_income', 
+        'loan_amnt', 
+        'loan_int_rate', 
+        'cb_person_cred_hist_length', 
+        'loan_percent_income', 
+        'person_emp_length'
+    ]
+
+        cat_cols = [
+            'age_group', 
+            'person_home_ownership', 
+            'loan_intent', 
+            'loan_grade', 
+            'cb_person_default_on_file'
+        ]
         
-        #Perfoming a Grid Search
-        params={"simpleimputer__strategy":["mean","median"],
-        "gradientboostingclassifier__max_depth":range(2,5),
-        "gradientboostingclassifier__n_estimators":range(25,31,5)}
+        #Build sub-pipelines
+        num_pipeline = Pipeline([('imputer', SimpleImputer())])
         
-        #Compute class weights for y_train for class balance
+        cat_pipeline = Pipeline([('encoder', OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1, encoded_missing_value=-1)),
+            ('imputer', SimpleImputer(strategy='most_frequent'))])
+        
+        #Combining the 2 subpipelines using ColumnTransformer
+        preprocessor = ColumnTransformer(transformers=[('num', num_pipeline, num_cols),('cat', cat_pipeline, cat_cols)])
+        
+        #model pipeline
+        clf = Pipeline([
+            ('preprocessor', preprocessor),
+            ('gradientboostingclassifier', GradientBoostingClassifier(random_state=42))
+        ])
+        
+        #Updated GridSearch parameter grid
+        params = {
+            "preprocessor__num__imputer__strategy": ["mean", "median"],
+            "gradientboostingclassifier__max_depth": range(2, 5),
+            "gradientboostingclassifier__n_estimators": range(25, 31, 5)
+        }
+        
+        #Fit GridSearch
         sample_weights = compute_sample_weight(class_weight="balanced", y=y_train)
-        grid_search=GridSearchCV(clf,param_grid=params,cv=5,n_jobs=-1)
-        
-        #Fit the model
-        grid_search.fit(X_train,y_train,gradientboostingclassifier__sample_weight=sample_weights)
+        grid_search = GridSearchCV(clf, param_grid=params, cv=5, n_jobs=-1)
+        grid_search.fit(X_train, y_train, gradientboostingclassifier__sample_weight=sample_weights)
         
         #Extract the best estimator and save to self.fitted_model
         self.fitted_model=  grid_search
