@@ -1,9 +1,11 @@
 #  CREDIT OPTIMIZATION AND A/B TESTING DASHBOARD
 
-[![Live App](https://img.shields.io/badge/Render-Live_Demo-brightgreen?style=for-the-badge&logo=render)](https://loan-approval-prediction-yx3l.onrender.com/)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)](https://www.python.org/)
-[![Dash](https://img.shields.io/badge/Dash-Plotly-100000?style=for-the-badge&logo=plotly)](https://dash.plotly.com/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Dash](https://img.shields.io/badge/Dash-0081C8?style=for-the-badge&logo=plotly&logoColor=white)
+![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
+![Render](https://img.shields.io/badge/Render-%2346E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
 An end-to-end Machine Learning web application and executive dashboard designed to evaluate credit risk, simulate decision-boundary threshold tuning and run A/B testing on medium-risk loan applicants in real time.
 >  **Live Demo:** [https://loan-approval-prediction-yx3l.onrender.com/](https://loan-approval-prediction-yx3l.onrender.com/)
