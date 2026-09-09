@@ -27,7 +27,8 @@ repo=Repository(mongo_uri,records=Data())
 Mdl=Model()
 #Instantiate Experiment
 Exp=Experiment(repo,Mdl)
-
+#Preload/cache data on startup
+Exp.load_and_cache_base_data()
 
 NUMERICAL_CONFIG = {
     'input_income': {'col': 'person_income', 'label': 'Annual Income ($):', 'step': 1000, 'curr': True},

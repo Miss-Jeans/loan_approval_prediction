@@ -56,27 +56,28 @@ class Repository:
         return list(self.collection.find(query))
 
     def assign_to_groups(self, observations=None):
-        """Randomly assigns observations into Control and Treatment groups."""
+        """Optimized group assignment."""
         if observations is None:
             observations = self.find_by_tier()
 
         if not observations:
             return []
 
-        # Reproducible random assignment
+        # Splitting the observations into 2 halves
+        num_obs = len(observations)
+        idx_split = num_obs // 2
+
+        # Performing index permutation 
         np.random.seed(42)
-        np.random.shuffle(observations)
+        indices = np.random.permutation(num_obs)
 
-        idx = len(observations) // 2
-
-        # Assign Control and Treatment
-        for doc in observations[:idx]:
+        for i, original_idx in enumerate(indices):
+            doc = observations[original_idx]
             doc["InExperiment"] = True
-            doc["group"] = "Control(Fixed_risk_Threshold)"
-
-        for doc in observations[idx:]:
-            doc["InExperiment"] = True
-            doc["group"] = "Treatment(Adjusted_risk_Threshold)"
+            if i < idx_split:
+                doc["group"] = "Control(Fixed_risk_Threshold)"
+            else:
+                doc["group"] = "Treatment(Adjusted_risk_Threshold)"
 
         return observations
 

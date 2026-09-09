@@ -9,6 +9,7 @@ import plotly.express as px
 #Model Building
 from sklearn.model_selection import train_test_split,GridSearchCV
 from sklearn.pipeline import make_pipeline,Pipeline
+from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from category_encoders import OrdinalEncoder
 from sklearn.ensemble import GradientBoostingClassifier 
