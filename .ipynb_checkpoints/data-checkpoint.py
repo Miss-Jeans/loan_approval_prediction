@@ -38,7 +38,11 @@ class Data:
         
         #Drop the person_age column
         df.drop(columns="person_age",inplace=True)
-        
+
+        # Replace 123 with NaN, then fill with the median of valid values
+        median_val = df.loc[df["person_emp_length"] != 123, "person_emp_length"].median()
+        df["person_emp_length"] = df["person_emp_length"].replace(123, median_val)
+            
         #return DataFrame
         return df
 
@@ -144,7 +148,7 @@ class GraphBuilder:
         fig=px.histogram(data_frame=df,x="person_emp_length",color="loan_status",barmode="group",title="Loan Approval by Employment Length")
         
         #Axes label
-        fig.update_layout(xaxis_title="Employment Length",yaxis_title="Frequency(count)")
+        fig.update_layout(xaxis_title="Employment Length(Years)",yaxis_title="Frequency(count)")
         fig.update_xaxes(range=[0, 25])
         
         # Return Figure
